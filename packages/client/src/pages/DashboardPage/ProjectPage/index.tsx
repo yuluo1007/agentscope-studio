@@ -1,6 +1,7 @@
 import { Key, memo, MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Flex, Input, TableColumnsType } from 'antd';
+import { TableColumnsType } from 'antd';
+import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
 
 import AsTable from '@/components/tables/AsTable';
@@ -111,23 +112,15 @@ const ProjectPage = () => {
     ];
 
     return (
-        <Flex
-            style={{ width: '100%', height: '100%', padding: '32px 48px' }}
-            vertical={true}
-            gap="middle"
-        >
+        <div className="flex flex-col w-full h-full p-8 gap-4">
             <PageTitleSpan title={t('common.projects')} />
-            <Flex vertical={false} gap="middle" align="center">
+            <div className="flex items-center gap-4">
                 <Input
                     value={searchText}
                     onChange={(event) => {
                         setSearchText(event.target.value);
                     }}
-                    style={{
-                        width: 300,
-                        borderRadius: 'calc(var(--radius) - 2px)',
-                    }}
-                    variant="outlined"
+                    className="w-full sm:w-[300px] rounded-md"
                     placeholder={t('placeholder.search-project')}
                 />
 
@@ -150,7 +143,7 @@ const ProjectPage = () => {
                 >
                     {t('action.delete')}
                 </SecondaryButton>
-            </Flex>
+            </div>
 
             <AsTable<DataType>
                 columns={columns}
@@ -174,7 +167,7 @@ const ProjectPage = () => {
                 rowKey="project"
                 rowSelection={rowSelection}
             />
-        </Flex>
+        </div>
     );
 };
 
