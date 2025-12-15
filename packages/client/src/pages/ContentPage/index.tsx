@@ -1,5 +1,6 @@
 import { memo, ReactNode } from 'react';
-import { Avatar, Skeleton } from 'antd';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar.tsx';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -73,10 +74,7 @@ const Block = ({ title, number, footer, icon }: BlockProps) => {
                         style={{ fontSize: 24, fontWeight: 700 }}
                     />
                 ) : (
-                    <Skeleton.Node
-                        active
-                        style={{ height: 30, width: '100%' }}
-                    />
+                    <Skeleton className="h-[30px] w-full" />
                 )}
 
                 {footer ? (
@@ -105,7 +103,9 @@ const ProjectRow = ({ project, runCount, lastUpdateTime }: ProjectRowProps) => {
             onClick={() => navigate(RouterPath.PROJECTS + '/' + project)}
         >
             <div className="flex items-center w-full min-w-0 gap-2">
-                <Avatar style={{ flexShrink: 0 }}>{project.slice(0, 1)}</Avatar>
+                <Avatar style={{ flexShrink: 0 }}>
+                    <AvatarFallback>{project.slice(0, 1)}</AvatarFallback>
+                </Avatar>
                 <div className="flex flex-col min-w-0 w-0 flex-1 gap-0.5">
                     <div className="text-[14px] w-full min-w-0 font-medium truncate">
                         {project}
