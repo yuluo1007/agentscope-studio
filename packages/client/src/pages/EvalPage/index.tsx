@@ -1,4 +1,3 @@
-import { Layout } from 'antd';
 import { memo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ import { EvaluationRoomContextProvider } from '@/context/EvaluationRoomContext';
 
 const EvalPage = () => {
     return (
-        <Layout className="w-full h-full">
+        <div className="w-full h-full">
             {/*<TitleBar title={t('common.evaluation')} />*/}
 
             <Routes>
@@ -34,7 +33,7 @@ const EvalPage = () => {
                     element={<ComparisonPage />}
                 />
             </Routes>
-        </Layout>
+        </div>
     );
 };
 

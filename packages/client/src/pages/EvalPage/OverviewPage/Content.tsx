@@ -1,6 +1,7 @@
 import { Key, memo, MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, TableColumnsType } from 'antd';
+import { TableColumnsType } from 'antd';
+import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
 
 import PageTitleSpan from '@/components/spans/PageTitleSpan.tsx';
@@ -112,7 +113,6 @@ const Context = () => {
                         onChange={(event) => {
                             setSearchText(event.target.value);
                         }}
-                        variant="filled"
                         placeholder={t('placeholder.search-evaluation')}
                     />
 

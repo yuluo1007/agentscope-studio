@@ -5,7 +5,12 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
+import { Search } from 'lucide-react';
+import {
+    InputGroup,
+    InputGroupAddon,
+    InputGroupInput,
+} from '@/components/ui/input-group';
 import type { DataNode } from 'antd/es/tree';
 import moment from 'moment';
 import { Key, memo, useMemo, useState } from 'react';
@@ -175,10 +180,12 @@ export const TraceTree = ({ spans }: Props) => {
     };
 
     return (
-        <div className="flex flex-col flex-1 w-full h-full overflow-y-auto gap-y-4">
+        <div className="flex flex-col flex-1 w-full h-full gap-y-4">
             <Dialog
                 open={open}
-                onOpenChange={(v) => { if (!v) setOpen(v) }}
+                onOpenChange={(v) => {
+                    if (!v) setOpen(v);
+                }}
             >
                 <DialogContent className="sm:max-w-[calc(100vw-100px)] sm:w-[calc(100vw-100px)] w-[calc(100vw-100px)] h-[calc(100vh-100px)] max-h-[calc(100vh-100px)]">
                     <DialogHeader>
@@ -189,13 +196,18 @@ export const TraceTree = ({ spans }: Props) => {
                     </div>
                 </DialogContent>
             </Dialog>
-            <Input
-                placeholder={t('placeholder.search-span')}
-                value={searchText}
-                onChange={(e) => {
-                    setSearchText(e.target.value);
-                }}
-            />
+            <InputGroup>
+                <InputGroupInput
+                    placeholder={t('placeholder.search-span')}
+                    value={searchText}
+                    onChange={(e) => {
+                        setSearchText(e.target.value);
+                    }}
+                />
+                <InputGroupAddon>
+                    <Search />
+                </InputGroupAddon>
+            </InputGroup>
             <Tree
                 className={`
                     px-0 w-full

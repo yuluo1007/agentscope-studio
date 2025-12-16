@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { Flex, Tooltip } from 'antd';
 import {
     Bar,
     BarChart,
@@ -12,13 +11,7 @@ import {
 
 const DiscreteMetric = () => {
     return (
-        <Flex
-            style={{
-                height: '100%',
-                width: '100%',
-            }}
-            vertical={true}
-        >
+        <div className="flex flex-col h-full w-full">
             <ResponsiveContainer height="100%" width="50%">
                 <BarChart
                     width={300}
@@ -74,7 +67,6 @@ const DiscreteMetric = () => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <YAxis type="number" />
                     <XAxis dataKey="name" type="category" />
-                    <Tooltip />
                     <Bar
                         dataKey="uv"
                         fill="var(--color-primary)"
@@ -88,7 +80,7 @@ const DiscreteMetric = () => {
                     </Bar>
                 </BarChart>
             </ResponsiveContainer>
-        </Flex>
+        </div>
     );
 };
 

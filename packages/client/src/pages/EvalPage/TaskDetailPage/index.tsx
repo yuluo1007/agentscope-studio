@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Segmented } from 'antd';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTranslation } from 'react-i18next';
 
 const TaskDetailPage = () => {
@@ -75,18 +75,23 @@ const TaskDetailPage = () => {
                             className={'p-6 min-h-[5.5rem] pt-2 space-y-4'}
                         ></div>
                     </div>
-
-                    <Segmented
-                        className={'col-span-full'}
-                        // block={true}
-                        options={[
-                            'Overview',
-                            'Repeat-1',
-                            'Repeat-2',
-                            'Repeat-3',
-                        ]}
-                    />
-
+                    <ToggleGroup
+                        type="single"
+                        defaultValue="Overview"
+                        onValueChange={() => {}}
+                    >
+                        {['Overview', 'Repeat-1', 'Repeat-2', 'Repeat-3'].map(
+                            (item) => (
+                                <ToggleGroupItem
+                                    value={item}
+                                    key={item}
+                                    aria-label="Toggle bold"
+                                >
+                                    {item}
+                                </ToggleGroupItem>
+                            ),
+                        )}
+                    </ToggleGroup>
                     <div className="col-span-full rounded-xl border shadow">
                         <div className="p-6 flex flex-col justify-between space-y-0 pb-1">
                             <h3 className="tracking-tight text-sm font-medium">

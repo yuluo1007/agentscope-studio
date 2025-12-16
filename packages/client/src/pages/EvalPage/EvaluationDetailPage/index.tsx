@@ -1,5 +1,4 @@
 import { memo, MouseEvent } from 'react';
-import { Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
     Area,
@@ -12,7 +11,14 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+    SelectGroup,
+} from '@/components/ui/select';
 import AsTable from '@/components/tables/AsTable';
 import { useEvaluationRoom } from '@/context/EvaluationRoomContext.tsx';
 import { EmptyPage } from '@/pages/DefaultPage';
@@ -308,19 +314,23 @@ const EvaluationDetailPage = () => {
                         <div className="flex flex-ro items-center justify-between space-y-1.5 p-6 pb-2 text-sm font-medium">
                             Result
                             <Select
-                                variant="filled"
                                 defaultValue="accuracy"
-                                options={[
-                                    {
-                                        label: 'Accuracy',
-                                        value: 'accuracy',
-                                    },
-                                    {
-                                        label: 'Tool Usage',
-                                        value: 'tool-usage',
-                                    },
-                                ]}
-                            />
+                                onValueChange={() => {}}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Please select" />
+                                </SelectTrigger>
+                                <SelectContent position="popper">
+                                    <SelectGroup>
+                                        <SelectItem value="accuracy">
+                                            Accuracy
+                                        </SelectItem>
+                                        <SelectItem value="tool-usage">
+                                            Tool Usage
+                                        </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 p-6 pt-3 w-full h-[150px]">
                             <ResponsiveContainer height="100%" width="100%">

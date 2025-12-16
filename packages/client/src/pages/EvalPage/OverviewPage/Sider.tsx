@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react';
-import { Input, List } from 'antd';
+import { List } from 'antd';
+import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
 
 import { EmptyPage } from '@/pages/DefaultPage';
@@ -29,7 +30,6 @@ const Sider = ({ selectedBenchmark, onSelect }: Props) => {
 
             <Input
                 className="w-full"
-                variant="filled"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 placeholder={t('placeholder.search-benchmark')}
