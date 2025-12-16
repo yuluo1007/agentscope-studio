@@ -1,4 +1,11 @@
-import { Input, Modal, Tree } from 'antd';
+import { Tree } from 'antd';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import type { DataNode } from 'antd/es/tree';
 import moment from 'moment';
 import { Key, memo, useMemo, useState } from 'react';
@@ -168,20 +175,21 @@ export const TraceTree = ({ spans }: Props) => {
     };
 
     return (
-        <div className="flex flex-col flex-1 w-full h-full overflow-x-hidden gap-y-4">
-            <Modal
+        <div className="flex flex-col flex-1 w-full h-full overflow-y-auto gap-y-4">
+            <Dialog
                 open={open}
-                title="Span"
-                onCancel={() => setOpen(false)}
-                width="calc(100% - 100px)"
-                height="calc(100vh - 100px)"
-                footer={null}
-                centered={true}
+                onOpenChange={(v) => { if (!v) setOpen(v) }}
             >
-                <SpanPanel span={currentSpan} />
-            </Modal>
-            <Input.Search
-                variant="filled"
+                <DialogContent className="sm:max-w-[calc(100vw-100px)] sm:w-[calc(100vw-100px)] w-[calc(100vw-100px)] h-[calc(100vh-100px)] max-h-[calc(100vh-100px)]">
+                    <DialogHeader>
+                        <DialogTitle>Span</DialogTitle>
+                    </DialogHeader>
+                    <div className="overflow-y-auto">
+                        <SpanPanel span={currentSpan} />
+                    </div>
+                </DialogContent>
+            </Dialog>
+            <Input
                 placeholder={t('placeholder.search-span')}
                 value={searchText}
                 onChange={(e) => {

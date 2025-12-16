@@ -1,5 +1,10 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import { Flex, Layout, Splitter } from 'antd';
+import { Flex, Layout } from 'antd';
+import {
+    ResizableHandle,
+    ResizablePanel,
+    ResizablePanelGroup,
+} from '@/components/ui/resizable';
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 
 import TracingComponent from './TracingComponent';
@@ -99,7 +104,6 @@ const RunContentPage = () => {
         : t('placeholder.input-disable');
 
     const shortcutKeys = isMacOs ? 'Command + Enter' : 'fCtrl + Enter';
-
     return (
         <Flex
             style={{
@@ -110,8 +114,14 @@ const RunContentPage = () => {
             vertical={true}
             gap="middle"
         >
-            <Splitter style={{ width: '100%' }}>
-                <Splitter.Panel className="flex w-full justify-center bg-[rgb(246,247,248)]">
+            <ResizablePanelGroup
+                style={{ width: '100%' }}
+                direction="horizontal"
+            >
+                <ResizablePanel
+                    defaultSize={60}
+                    className="flex w-full justify-center bg-[rgb(246,247,248)]"
+                >
                     <AsChat
                         replies={replies}
                         isReplying={true}
@@ -135,20 +145,21 @@ const RunContentPage = () => {
                             messageApi.error(error);
                         }}
                     />
-                </Splitter.Panel>
-                <Splitter.Panel
+                </ResizablePanel>
+                <ResizableHandle />
+                <ResizablePanel
                     collapsible={true}
-                    defaultSize={400}
-                    max={600}
-                    min={400}
+                    defaultSize={40}
+                    maxSize={60}
+                    minSize={40}
                 >
                     <TracingComponent
                         activateTab={activateTab}
                         onTabChange={(key) => setActiveTab(key)}
                         reply={displayedReply}
                     />
-                </Splitter.Panel>
-            </Splitter>
+                </ResizablePanel>
+            </ResizablePanelGroup>
         </Flex>
     );
 };

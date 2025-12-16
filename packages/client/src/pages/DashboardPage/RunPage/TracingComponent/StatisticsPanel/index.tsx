@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Col, Flex, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import {
     Bar,
@@ -49,19 +49,11 @@ const StatisticsPanel = () => {
     );
 
     return (
-        <Flex
-            vertical={true}
+        <div 
+            className="flex flex-col w-full h-full p-4 gap-6 overflow-x-hidden overflow-y-auto box-border"
             style={{
-                maxWidth: '100%',
-                width: '100%',
-                height: '100%',
-                padding: 16,
-                overflowX: 'hidden',
-                overflowY: 'auto',
-                boxSizing: 'border-box',
                 ...RemoveScrollBarStyle,
             }}
-            gap="large"
         >
             <StatusSection
                 status={runData?.status}
@@ -287,7 +279,7 @@ const StatisticsPanel = () => {
                     )}
                 </Col>
             </Row>
-        </Flex>
+        </div>
     );
 };
 

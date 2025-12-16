@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Tabs } from 'antd';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import ReplyPanel from './ReplyPanel';
 import TracePanel from './TracePanel';
@@ -65,12 +65,27 @@ const TracingComponent = ({ activateTab, onTabChange, reply }: Props) => {
             </div>
             <div ref={refView} className="w-full overflow-hidden flex-1">
                 <Tabs
-                    className="w-full h-full [&_.ant-tabs-content]:h-full"
-                    activeKey={activateTab}
-                    items={items}
-                    size="small"
-                    onChange={onTabChange}
-                />
+                    value={activateTab}
+                    onValueChange={onTabChange}
+                    className="w-full h-full"
+                >
+                    <TabsList className="ml-4">
+                        {items.map((item) => (
+                            <TabsTrigger value={item.key} key={item.key}>
+                                {item.label}
+                            </TabsTrigger>
+                        ))}
+                    </TabsList>
+                    {items.map((item) => (
+                        <TabsContent
+                            value={item.key}
+                            key={item.key}
+                            className="h-full min-h-0 overflow-y-auto"
+                        >
+                            {item.children}
+                        </TabsContent>
+                    ))}
+                </Tabs>
             </div>
         </div>
     );

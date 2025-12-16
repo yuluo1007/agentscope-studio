@@ -1,4 +1,11 @@
-import { Button, Flex, Input, Layout, Tooltip } from 'antd';
+import { Layout } from 'antd';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { Key, memo, useEffect, useRef, useState } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -91,9 +98,9 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
             width={SiderDrawerWidth.FOLDED}
             style={{ height: '100%', zIndex: 1 }}
         >
-            <Flex
+            <div
                 ref={refTable}
-                className="animated-sider-content"
+                className="animated-sider-content flex flex-col gap-4 w-full h-full"
                 style={{
                     width: folded
                         ? SiderDrawerWidth.FOLDED
@@ -108,51 +115,37 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
                     position: 'relative',
                     borderRight: '1px solid var(--border)',
                 }}
-                vertical={true}
-                gap="middle"
             >
                 {/* Header with back button and project name */}
-                <Flex
-                    vertical={false}
-                    align="center"
-                    gap="small"
-                    style={{ maxWidth: '100%' }}
-                >
+                <div className="flex items-center gap-2 max-w-full">
                     <Button
-                        variant="filled"
-                        icon={<LogOutIcon className="rotate-180 size-4" />}
-                        color="default"
+                        variant="secondary"
                         onClick={() => {
                             navigate(RouterPath.PROJECTS);
                         }}
-                    />
-
-                    <Tooltip title={t('common.project') + `: ${project}`}>
-                        <div
-                            style={{
-                                flex: 1,
-                                minWidth: 0,
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                whiteSpace: 'nowrap',
-                                fontSize: 14,
-                                fontWeight: 500,
-                            }}
-                        >
+                        size="sm"
+                        className="cursor-pointer"
+                    >
+                        <LogOutIcon className="rotate-180 size-4" />
+                    </Button>
+                    <Tooltip>
+                        <TooltipTrigger className="truncate max-w-full">
                             {project}
-                        </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            {t('common.project') + `: ${project}`}
+                        </TooltipContent>
                     </Tooltip>
-                </Flex>
+                </div>
 
                 {/* Search and control buttons */}
-                <Flex vertical={false} gap="small" justify="space-between">
+                <div className="flex items-center gap-2 justify-between">
                     <Input
                         style={{
                             maxWidth: 300,
                             borderRadius: 'calc(var(--radius) - 2px)',
                             flex: 1,
                         }}
-                        variant="outlined"
                         placeholder={t('placeholder.search-run')}
                     />
 
@@ -179,7 +172,7 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
                             icon={<DeleteIcon width={13} height={13} />}
                         />
                     )}
-                </Flex>
+                </div>
 
                 {/* Runs table with conditional columns and row selection */}
                 <AsTable
@@ -296,7 +289,7 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
                     }}
                     rowHoverable={true}
                 />
-            </Flex>
+            </div>
         </Sider>
     );
 };
