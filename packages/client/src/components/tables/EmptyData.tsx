@@ -1,4 +1,3 @@
-import { Flex } from 'antd';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,17 +10,15 @@ import PageEmptyIcon from '@/assets/svgs/page-empty.svg?react';
 const EmptyData = () => {
     const { t } = useTranslation();
     return (
-        <Flex
-            vertical={true}
+        <div
+            className="flex flex-col items-center justify-center"
             style={{ height: '100%', width: '100%', background: 'transparent' }}
-            align="center"
-            justify="center"
         >
             <PageEmptyIcon width={250} height={250} />
             <span style={{ marginTop: -10 }}>
                 {t('default-page.no-data-available')}
             </span>
-        </Flex>
+        </div>
     );
 };
 

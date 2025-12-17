@@ -1,5 +1,4 @@
 import { CSSProperties, memo } from 'react';
-import { Flex } from 'antd';
 import SlotCounter from 'react-slot-counter';
 
 /**
@@ -17,7 +16,7 @@ interface Props {
  */
 const NumberCounter = ({ number, style = {} }: Props) => {
     return (
-        <Flex style={{ ...style }} align="center">
+        <div style={{ ...style }} className="flex items-center">
             <SlotCounter
                 startValue={0}
                 startValueOnce
@@ -25,7 +24,7 @@ const NumberCounter = ({ number, style = {} }: Props) => {
                 sequentialAnimationMode
                 // useMonospaceWidth
             />
-        </Flex>
+        </div>
     );
 };
 

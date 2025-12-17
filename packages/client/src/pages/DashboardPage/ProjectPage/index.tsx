@@ -215,7 +215,7 @@ const ProjectPage = () => {
                     }
                     icon={<DeleteIcon width={13} height={13} />}
                     disabled={selectedRowKeys.length === 0}
-                    variant="dashed"
+                    variant="outline"
                     onClick={handleDelete}
                 >
                     {t('action.delete')}

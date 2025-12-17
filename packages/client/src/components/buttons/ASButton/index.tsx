@@ -1,28 +1,46 @@
-import { ReactNode, RefObject } from 'react';
-import { Button, ButtonProps, Tooltip } from 'antd';
-import { TooltipPlacement } from 'antd/lib/tooltip';
+import { ReactNode, RefObject, ButtonHTMLAttributes } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 /**
  * Extended button props that include tooltip and placement configuration.
  */
-interface Props extends ButtonProps {
-    ref?: RefObject<null> | undefined;
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+    ref?: RefObject<HTMLButtonElement> | null;
     tooltip: string;
-    placement?: TooltipPlacement;
+    children?: ReactNode;
+    icon?: ReactNode;
+    variant?:
+        | 'link'
+        | 'default'
+        | 'destructive'
+        | 'outline'
+        | 'secondary'
+        | 'ghost'
+        | null
+        | undefined;
 }
 
 /**
  * Secondary button with tooltip support and configurable placement.
  * Uses Ant Design's default type with minimal styling.
  */
-const SecondaryButton = ({
-    tooltip,
-    placement = 'top',
-    ...restProps
-}: Props) => {
+const SecondaryButton = ({ tooltip, children, icon, ...restProps }: Props) => {
     return (
-        <Tooltip title={tooltip} placement={placement}>
-            <Button color="default" type="default" {...restProps} />
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <span>
+                    <Button {...restProps}>
+                        {children}
+                        {icon}
+                    </Button>
+                </span>
+            </TooltipTrigger>
+            <TooltipContent>{tooltip}</TooltipContent>
         </Tooltip>
     );
 };
@@ -30,7 +48,7 @@ const SecondaryButton = ({
 /**
  * Props for the switch button component that toggles between active/inactive states.
  */
-interface SwitchButtonProps extends ButtonProps {
+interface SwitchButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     tooltip: string;
     title?: string;
     activeIcon?: ReactNode;
@@ -55,15 +73,20 @@ const SwitchButton = ({
     const color = active ? 'var(--secondary-foreground)' : 'var(--hint-color)';
 
     return (
-        <Tooltip title={tooltip}>
-            <Button
-                style={{ background: bgColor, color: color }}
-                icon={active ? activeIcon : inactiveIcon}
-                className="as-switch-button"
-                {...restProps}
-            >
-                {title}
-            </Button>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <Button
+                    style={{ background: bgColor, color: color }}
+                    className="as-switch-button"
+                    variant="outline"
+                    {...restProps}
+                >
+                    {title}{active ? activeIcon : inactiveIcon}
+                </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+                {tooltip}
+            </TooltipContent>
         </Tooltip>
     );
 };

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Progress } from 'antd';
+import { Progress } from '@/components/ui/progress';
 import { useTranslation } from 'react-i18next';
 
 import SortIcon from '@/assets/svgs/sort.svg?react';
@@ -33,15 +33,13 @@ export const ProgressCell = memo(
         return (
             <div className="flex flex-row items-center gap-2">
                 <Progress
-                    percent={progress}
-                    steps={5}
-                    showInfo={false}
-                    strokeColor={
-                        selected
+                    value={progress}
+                    className="w-[60%]"
+                    style={{
+                        backgroundColor: selected
                             ? 'var(--primary-foreground)'
-                            : 'var(--primary)'
-                    }
-                    style={{ color: 'red !important' }}
+                            : '',
+                    }}
                 />
                 <div
                     className={

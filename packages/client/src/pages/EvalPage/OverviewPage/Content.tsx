@@ -119,7 +119,7 @@ const Context = () => {
                     <SecondaryButton
                         tooltip={t('tooltip.button.compare-evaluation')}
                         icon={<CompareIcon width={12} height={12} />}
-                        variant="dashed"
+                        variant="outline"
                         disabled={selectedRowKeys.length !== 2}
                         onClick={() => {}}
                     >
@@ -138,7 +138,7 @@ const Context = () => {
                         }
                         icon={<DeleteIcon width={13} height={13} />}
                         disabled={selectedRowKeys.length === 0}
-                        variant="dashed"
+                        variant="outline"
                         onClick={() => {}}
                     >
                         {t('action.delete')}
