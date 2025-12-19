@@ -1,5 +1,4 @@
 import { memo, ReactNode } from 'react';
-import { Col, Flex, Row } from 'antd';
 
 import NumberCounter from '@/components/numbers/NumberCounter';
 
@@ -22,52 +21,28 @@ export const MetaDataSection = memo(({ title, data }: MetaDataSectionProps) => {
         value: string | number | undefined | ReactNode,
     ) => {
         return (
-            <Row key={title} gutter={0}>
-                <Col span={1} />
-                <Col
-                    span={7}
-                    style={{
-                        height: '100%',
-                        width: '100%',
-                        maxWidth: '100%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        fontSize: 12,
-                        color: 'var(--muted-foreground)',
-                    }}
-                >
+            <div key={title} className="grid grid-cols-24 gap-0">
+                <div className="col-span-1"></div>
+                <div className="col-span-7 h-full w-full max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground">
                     {title}
-                </Col>
-                <Col
-                    span={16}
-                    style={{
-                        height: '100%',
-                        width: '100%',
-                        maxWidth: '100%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        fontSize: 12,
-                        color: 'var(--primary)',
-                    }}
-                >
+                </div>
+                <div className="col-span-16 h-full w-full max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-xs text-primary">
                     {typeof value === 'number' ? (
                         <NumberCounter number={value} />
                     ) : (
                         value
                     )}
-                </Col>
-            </Row>
+                </div>
+            </div>
         );
     };
 
     return (
-        <Flex vertical={true} gap="small">
+        <div className="flex flex-col gap-2">
             <PanelTitle title={title} />
             {Object.entries(data).map(([key, value]) => {
                 return renderRow(key, value);
             })}
-        </Flex>
+        </div>
     );
 });

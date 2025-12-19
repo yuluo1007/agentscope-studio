@@ -1,5 +1,4 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import { Flex, Layout } from 'antd';
 import {
     ResizableHandle,
     ResizablePanel,
@@ -105,15 +104,7 @@ const RunContentPage = () => {
 
     const shortcutKeys = isMacOs ? 'Command + Enter' : 'fCtrl + Enter';
     return (
-        <Flex
-            style={{
-                minHeight: 0,
-                height: 0,
-            }}
-            flex={1}
-            vertical={true}
-            gap="middle"
-        >
+        <div className="flex flex-1 h-full min-h-0">
             <ResizablePanelGroup
                 style={{ width: '100%' }}
                 direction="horizontal"
@@ -160,12 +151,11 @@ const RunContentPage = () => {
                     />
                 </ResizablePanel>
             </ResizablePanelGroup>
-        </Flex>
+        </div>
     );
 };
 
 const RunPage = () => {
-    const { Content } = Layout;
     const { projectName } = useParams<{ projectName: string }>();
     const navigate = useNavigate();
 
@@ -175,7 +165,7 @@ const RunPage = () => {
 
     return (
         <ProjectRoomContextProvider project={projectName}>
-            <Layout>
+            <div className="flex h-full">
                 <ProjectRunSider
                     onRunClick={(runId) =>
                         navigate(`/projects/${projectName}/runs/${runId}`, {
@@ -183,15 +173,7 @@ const RunPage = () => {
                         })
                     }
                 />
-                <Content>
-                    <Flex
-                        flex={1}
-                        style={{
-                            height: '100%',
-                            minHeight: 0,
-                        }}
-                        vertical={true}
-                    >
+                <div className="flex-1 h-full">
                         <Routes>
                             <Route index element={<EmptyRunPage />} />
                             <Route path="runs" element={<EmptyRunPage />} />
@@ -204,9 +186,8 @@ const RunPage = () => {
                                 }
                             />
                         </Routes>
-                    </Flex>
-                </Content>
-            </Layout>
+                </div>
+            </div>
         </ProjectRoomContextProvider>
     );
 };

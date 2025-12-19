@@ -1,4 +1,3 @@
-import { Layout } from 'antd';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -24,8 +23,6 @@ import { useProjectRoom } from '@/context/ProjectRoomContext.tsx';
 
 import './index.css';
 import { RouterPath } from '@/pages/RouterPath.ts';
-
-const { Sider } = Layout;
 
 /**
  * Sider width configurations for folded and unfolded states.
@@ -94,9 +91,9 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
     };
 
     return (
-        <Sider
-            width={SiderDrawerWidth.FOLDED}
-            style={{ height: '100%', zIndex: 1 }}
+        <div
+            className="h-full z-10"
+            style={{   width: SiderDrawerWidth.FOLDED }}
         >
             <div
                 ref={refTable}
@@ -290,7 +287,7 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
                     rowHoverable={true}
                 />
             </div>
-        </Sider>
+        </div>
     );
 };
 
