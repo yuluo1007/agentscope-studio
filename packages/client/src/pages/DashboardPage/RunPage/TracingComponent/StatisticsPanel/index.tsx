@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import {
     Bar,
@@ -69,23 +68,9 @@ const StatisticsPanel = () => {
                 data={invocationData}
             />
 
-            <Row gutter={0}>
-                <Col
-                    span={24}
-                    style={{
-                        height: '100%',
-                        width: '100%',
-                        maxWidth: '100%',
-                        // TODO: handle tooltip and height overflow
-                        //  at the same time
-                        // overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        fontSize: 12,
-                        color: 'var(--muted-foreground)',
-                    }}
-                >
-                    <div
+            <div className="w-full">
+                <div className="w-full text-xs text-muted-foreground">
+                     <div
                         style={{
                             width: '100%',
                             borderRadius: '6px 6px 0 0',
@@ -173,25 +158,13 @@ const StatisticsPanel = () => {
                             }}
                         />
                     )}
-                </Col>
-            </Row>
+                </div>
+            </div>
 
             <MetaDataSection title="Token" data={tokenData} />
 
-            <Row gutter={0}>
-                <Col
-                    span={24}
-                    style={{
-                        height: '100%',
-                        width: '100%',
-                        maxWidth: '100%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        fontSize: 12,
-                        color: 'var(--muted-foreground)',
-                    }}
-                >
+            <div className="w-full">
+                <div className="w-full text-xs text-muted-foreground">
                     <div
                         style={{
                             width: '100%',
@@ -262,7 +235,7 @@ const StatisticsPanel = () => {
                                 />
                                 <Bar
                                     dataKey="completionTokens"
-                                    fill="var（--secondary-foreground)"
+                                    fill="var(--secondary-foreground)"
                                     maxBarSize={20}
                                     stackId="modelName"
                                     radius={[0, 6, 6, 0]}
@@ -278,8 +251,8 @@ const StatisticsPanel = () => {
                             }}
                         />
                     )}
-                </Col>
-            </Row>
+                </div>
+            </div>
         </div>
     );
 };
