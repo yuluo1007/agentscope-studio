@@ -9,7 +9,6 @@ import { FridayAppRoomContextProvider } from '@/context/FridayAppRoomContext.tsx
 import { FridaySettingRoomContextProvider } from '@/context/FridaySettingRoomContext.tsx';
 
 const FridayPage = () => {
-
     return (
         <div className="w-full h-full">
             <Routes>

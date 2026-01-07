@@ -28,7 +28,7 @@ const NumberCounter = ({ number, style = {} }: Props) => {
                 value={numericPart}
                 sequentialAnimationMode
                 // useMonospaceWidth
-                />
+            />
             {unitPart && <span>{unitPart}</span>}
         </div>
     );

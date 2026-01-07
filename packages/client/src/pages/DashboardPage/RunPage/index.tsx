@@ -174,18 +174,18 @@ const RunPage = () => {
                     }
                 />
                 <div className="flex-1 h-full">
-                        <Routes>
-                            <Route index element={<EmptyRunPage />} />
-                            <Route path="runs" element={<EmptyRunPage />} />
-                            <Route
-                                path="runs/:runId"
-                                element={
-                                    <RunRoomContextProvider>
-                                        <RunContentPage />
-                                    </RunRoomContextProvider>
-                                }
-                            />
-                        </Routes>
+                    <Routes>
+                        <Route index element={<EmptyRunPage />} />
+                        <Route path="runs" element={<EmptyRunPage />} />
+                        <Route
+                            path="runs/:runId"
+                            element={
+                                <RunRoomContextProvider>
+                                    <RunContentPage />
+                                </RunRoomContextProvider>
+                            }
+                        />
+                    </Routes>
                 </div>
             </div>
         </ProjectRoomContextProvider>

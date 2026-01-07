@@ -43,11 +43,13 @@ const InvocationPanel = () => {
                         children: '请给我一个关于如何使用Python的简单示例。',
                     },
                 ].map((item, index) => (
-                    <AccordionItem 
+                    <AccordionItem
                         value={item.label}
                         className={`${index !== 0 ? 'border-t border-solid border-gray-200' : ''}`}
                     >
-                        <AccordionTrigger className="px-4">{item.label}</AccordionTrigger>
+                        <AccordionTrigger className="px-4">
+                            {item.label}
+                        </AccordionTrigger>
                         <AccordionContent className="flex flex-col gap-4 text-balance px-4 pb-4">
                             <p>{item.children}</p>
                         </AccordionContent>

@@ -49,7 +49,7 @@ const StatisticsPanel = () => {
     );
 
     return (
-        <div 
+        <div
             className="flex flex-col w-full h-full p-4 gap-6 overflow-x-hidden overflow-y-auto box-border"
             style={{
                 ...RemoveScrollBarStyle,
@@ -70,7 +70,7 @@ const StatisticsPanel = () => {
 
             <div className="w-full">
                 <div className="w-full text-xs text-muted-foreground">
-                     <div
+                    <div
                         style={{
                             width: '100%',
                             borderRadius: '6px 6px 0 0',

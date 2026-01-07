@@ -81,12 +81,11 @@ const SwitchButton = ({
                     variant="outline"
                     {...restProps}
                 >
-                    {title}{active ? activeIcon : inactiveIcon}
+                    {title}
+                    {active ? activeIcon : inactiveIcon}
                 </Button>
             </TooltipTrigger>
-            <TooltipContent>
-                {tooltip}
-            </TooltipContent>
+            <TooltipContent>{tooltip}</TooltipContent>
         </Tooltip>
     );
 };

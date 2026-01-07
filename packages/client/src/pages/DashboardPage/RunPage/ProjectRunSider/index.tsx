@@ -91,10 +91,7 @@ const ProjectRunSider = ({ onRunClick }: Props) => {
     };
 
     return (
-        <div
-            className="h-full z-10"
-            style={{   width: SiderDrawerWidth.FOLDED }}
-        >
+        <div className="h-full z-10" style={{ width: SiderDrawerWidth.FOLDED }}>
             <div
                 ref={refTable}
                 className="animated-sider-content flex flex-col gap-4 w-full h-full"
