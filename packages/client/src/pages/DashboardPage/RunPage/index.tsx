@@ -137,7 +137,7 @@ const RunContentPage = () => {
                         }}
                     />
                 </ResizablePanel>
-                <ResizableHandle />
+                <ResizableHandle withHandle />
                 <ResizablePanel
                     collapsible={true}
                     defaultSize={40}
