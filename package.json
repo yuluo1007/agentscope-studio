@@ -8,13 +8,13 @@
         "@trpc/client": "^11.0.1",
         "@trpc/react-query": "^11.0.1"
     },
-    "version": "1.0.7",
+    "version": "1.0.10",
     "engines": {
         "node": ">=20.0.0",
         "npm": ">=10.0.0"
     },
     "bin": {
-        "as_studio": "./bin/cli.js"
+        "as_studio": "bin/cli.js"
     },
     "files": [
         "dist"
@@ -74,5 +74,16 @@
     ],
     "author": "Dawei Gao",
     "license": "Apache-2.0",
-    "description": "AgentScope Studio is a powerful local monitoring and visualization tool designed to provide real-time insights into your system's performance and behavior."
+    "description": "AgentScope Studio is a powerful local monitoring and visualization tool designed to provide real-time insights into your system's performance and behavior.",
+    "directories": {
+        "doc": "docs"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhijianma/agentscope-studio.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zhijianma/agentscope-studio/issues"
+    },
+    "homepage": "https://github.com/zhijianma/agentscope-studio#readme"
 }
