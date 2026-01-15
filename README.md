@@ -88,7 +88,7 @@ AgentScope Studio is a powerful **local visualization toolkit** designed for dev
 
 ### Prerequisites
 
-- **Node.js >= 20.0.0**
+- **Node.js >= 20.19.0**
 - **npm >= 10.0.0**
 
 > **💡 Tip**: If you're using [nvm](https://github.com/nvm-sh/nvm), you can run `nvm use` to automatically switch to the required Node.js version.
