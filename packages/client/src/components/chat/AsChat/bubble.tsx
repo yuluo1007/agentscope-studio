@@ -25,8 +25,6 @@ interface Props {
     onPlaySpeech?: () => void;
     /** Callback to pause speech audio */
     onPauseSpeech?: () => void;
-    /** Callback to stop other speech audio */
-    onStopOtherSpeech?: () => void;
 }
 
 const AsBubble = ({
@@ -38,7 +36,6 @@ const AsBubble = ({
     speechState,
     onPlaySpeech,
     onPauseSpeech,
-    onStopOtherSpeech,
 }: Props) => {
     const { t } = useTranslation();
 
@@ -63,19 +60,14 @@ const AsBubble = ({
             <BubbleBlock block={block} markdown={markdown} />
         ));
     };
-    const onPlay = () => {
-        onStopOtherSpeech?.();
-        onPlaySpeech?.();
-    };
 
-    const hasAudio = useMemo(
-        () => (speechState?.fullAudioData?.length || 0) > 0,
-        [speechState?.fullAudioData],
-    );
-    const showSpeechBar = useMemo(
-        () => speechState?.isStreaming || hasAudio,
-        [speechState?.isStreaming, hasAudio],
-    );
+    const showSpeechBar = useMemo(() => {
+        if (!speechState) return false;
+        return (
+            speechState.isStreaming ||
+            (speechState.fullAudioData?.length ?? 0) > 0
+        );
+    }, [speechState]);
 
     return (
         <div className="flex flex-col w-full max-w-full">
@@ -116,21 +108,17 @@ const AsBubble = ({
                             return renderBlock(msg.content, markdown);
                         })}
                     </div>
-
-                    {/* Speech bar - shown below the message content */}
-                    {showSpeechBar && (
-                        <div className="mt-2">
-                            <SpeechBar
-                                isPlaying={speechState?.isPlaying || false}
-                                isStreaming={speechState?.isStreaming || false}
-                                hasAudio={hasAudio}
-                                onPlay={onPlay}
-                                onPause={onPauseSpeech || (() => {})}
-                            />
-                        </div>
-                    )}
                 </div>
             </div>
+            {/* Speech bar - shown below the message content */}
+            {showSpeechBar && onPlaySpeech && onPauseSpeech && (
+                <SpeechBar
+                    isPlaying={speechState?.isPlaying || false}
+                    isStreaming={speechState?.isStreaming || false}
+                    onPlay={onPlaySpeech}
+                    onPause={onPauseSpeech}
+                />
+            )}
         </div>
     );
 };

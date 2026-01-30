@@ -486,9 +486,6 @@ const AsChat = ({
                                 onPauseSpeech={() =>
                                     handlePauseSpeech(lookupId)
                                 }
-                                onStopOtherSpeech={() =>
-                                    handleStopOtherSpeech(lookupId)
-                                }
                             />
                         );
                     })}

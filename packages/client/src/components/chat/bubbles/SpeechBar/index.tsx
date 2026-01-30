@@ -8,8 +8,6 @@ interface Props {
     isPlaying: boolean;
     /** Whether still receiving streaming data */
     isStreaming: boolean;
-    /** Whether there is any audio data available */
-    hasAudio: boolean;
     /** Callback to play audio */
     onPlay: () => void;
     /** Callback to pause audio */
@@ -20,16 +18,9 @@ interface Props {
  * A speech bar component that displays audio playback status and play/pause button.
  * Shown below chat bubbles when speech audio is available.
  */
-const SpeechBar = ({
-    isPlaying,
-    isStreaming,
-    hasAudio,
-    onPlay,
-    onPause,
-}: Props) => {
-    const [animationBars, setAnimationBars] = useState<number[]>([
-        3, 5, 4, 6, 3,
-    ]);
+const SpeechBar = ({ isPlaying, isStreaming, onPlay, onPause }: Props) => {
+    const defaultBars = [3, 5, 4, 6, 3];
+    const [animationBars, setAnimationBars] = useState<number[]>(defaultBars);
     const animationRef = useRef<NodeJS.Timeout | null>(null);
 
     // Animate the audio visualization bars when playing
@@ -38,7 +29,7 @@ const SpeechBar = ({
             animationRef.current = setInterval(() => {
                 setAnimationBars(
                     Array.from(
-                        { length: 5 },
+                        { length: defaultBars.length },
                         () => Math.floor(Math.random() * 8) + 2,
                     ),
                 );
@@ -48,7 +39,7 @@ const SpeechBar = ({
                 clearInterval(animationRef.current);
                 animationRef.current = null;
             }
-            setAnimationBars([3, 5, 4, 6, 3]);
+            setAnimationBars([...defaultBars]);
         }
 
         return () => {
@@ -58,47 +49,41 @@ const SpeechBar = ({
         };
     }, [isPlaying]);
 
-    if (!hasAudio && !isStreaming) {
-        return null;
-    }
-
     return (
-        <div
-            className={cn(
-                'flex items-center gap-2 px-3 py-1.5 rounded-full',
-                'bg-gradient-to-r from-primary-50 to-primary-100',
-                'border border-primary-200',
-                'shadow-sm',
-                'transition-all duration-300',
-                'w-[80px]',
-                isPlaying && 'ring-2 ring-primary-300 ring-opacity-50',
-            )}
-        >
-            {/* Audio visualization bars */}
-            <div className="flex items-end gap-0.5 h-4">
-                {animationBars.map((height, index) => (
-                    <div
-                        key={index}
-                        className={cn(
-                            'w-0.5 bg-primary-500 rounded-full transition-all duration-150',
-                            isPlaying ? 'opacity-100' : 'opacity-50',
-                        )}
-                        style={{ height: `${height * 2}px` }}
-                    />
-                ))}
-            </div>
-
-            {/* Streaming indicator */}
-            {isStreaming && (
-                <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+        <div className="ml-2 mr-4 py-2">
+            <div
+                className={cn(
+                    'flex items-center justify-center gap-1 px-3 py-1 rounded-full h-8 w-16',
+                    'bg-gradient-to-r from-primary-50 to-primary-100',
+                    'border border-primary-200',
+                    'shadow-sm',
+                    'transition-all duration-300',
+                    isPlaying && 'border-2 border-primary-500 shadow-md',
+                )}
+            >
+                {/* Audio visualization bars */}
+                <div className="flex items-end gap-0.5 h-4 -mt-1">
+                    {animationBars.map((height, index) => (
+                        <div
+                            key={index}
+                            className={cn(
+                                'w-0.5 bg-primary-500 rounded-full transition-all duration-150',
+                                isPlaying ? 'opacity-100' : 'opacity-50',
+                            )}
+                            style={{ height: `${height * 1.5}px` }}
+                        />
+                    ))}
                 </div>
-            )}
 
-            {/* Controls - only show when not streaming */}
-            {hasAudio && !isStreaming && (
-                <>
-                    {/* Play/Pause button */}
+                {/* Streaming indicator */}
+                {isStreaming && (
+                    <div className="flex items-center gap-1 ml-2">
+                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+                    </div>
+                )}
+
+                {/* Controls - only show when not streaming */}
+                {!isStreaming && (
                     <Button
                         size="icon"
                         variant="ghost"
@@ -118,8 +103,8 @@ const SpeechBar = ({
                             <PlayIcon className="size-3 text-primary-600" />
                         )}
                     </Button>
-                </>
-            )}
+                )}
+            </div>
         </div>
     );
 };
