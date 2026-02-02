@@ -30,6 +30,9 @@ declare global {
         SpeechRecognition?: SpeechRecognitionConstructor;
         webkitSpeechRecognition?: SpeechRecognitionConstructor;
     }
+    interface Navigator {
+        userLanguage?: string;
+    }
 }
 
 interface UseSpeechRecognitionOptions {
@@ -51,13 +54,22 @@ interface UseSpeechRecognitionReturn {
     error: string | null;
 }
 
+// Get the system default language
+const getSystemLanguage = (): string => {
+    if (typeof window !== 'undefined' && window.navigator) {
+        const userLang = navigator.language || navigator.userLanguage;
+        return userLang || 'zh-CN';
+    }
+    return 'zh-CN';
+};
+
 export const useSpeechRecognition = (
     options: UseSpeechRecognitionOptions = {},
 ): UseSpeechRecognitionReturn => {
     const {
         continuous = true,
         interimResults = true,
-        lang = 'zh-CN',
+        lang = getSystemLanguage(),
         onResult,
         onError,
     } = options;
