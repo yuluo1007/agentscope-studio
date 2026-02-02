@@ -23,6 +23,9 @@ import {
     AttachItem,
 } from '@/components/chat/AsChat/attach.tsx';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area.tsx';
+import { useMessageApi } from '@/context/MessageApiContext';
+import VoiceButton from './voice_button';
+import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 
 export interface AsTextareaProps {
     inputText?: string;
@@ -72,7 +75,29 @@ const AsTextarea = ({
     const [internalAttachment, setInternalAttachment] = useState<AttachData[]>(
         [],
     );
-
+    const {
+        isListening,
+        startListening,
+        stopListening,
+        resetTranscript,
+        isSupported,
+        error,
+    } = useSpeechRecognition({
+        continuous: true,
+        interimResults: true,
+        onResult: (newText) => {
+            setInternalInputText((prev) => prev + newText + ' ');
+        },
+    });
+    const { messageApi } = useMessageApi();
+    if (error) messageApi.error(error);
+    const handleToggleVoice = () => {
+        if (isListening) {
+            stopListening();
+        } else {
+            startListening();
+        }
+    };
     const inputText = externalInputText ?? internalInputText;
     const handleChange = (text: string) => {
         if (externalInputText === undefined) {
@@ -122,6 +147,11 @@ const AsTextarea = ({
 
             // Clear the attachment
             handleAttachChange(() => []);
+
+            // stop speech recognition
+            stopListening();
+            // Reset the speech recognition transcript
+            resetTranscript();
         } else {
             onActionClick([], null);
         }
@@ -234,6 +264,12 @@ const AsTextarea = ({
                         </TooltipContent>
                     </Tooltip>
                 ) : null}
+                {isSupported && (
+                    <VoiceButton
+                        isListening={isListening}
+                        onClick={handleToggleVoice}
+                    />
+                )}
                 <Tooltip>
                     <TooltipTrigger>
                         <InputGroupButton
