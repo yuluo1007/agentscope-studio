@@ -67,7 +67,7 @@ export const useSpeechRecognition = (
     options: UseSpeechRecognitionOptions = {},
 ): UseSpeechRecognitionReturn => {
     const {
-        continuous = true,
+        continuous = false,
         interimResults = true,
         lang = getSystemLanguage(),
         onResult,
@@ -94,10 +94,12 @@ export const useSpeechRecognition = (
         if (!SpeechRecognitionConstructor) return null;
 
         const recognition = new SpeechRecognitionConstructor();
-        recognition.continuous = continuous;
-        recognition.interimResults = interimResults;
+        recognition.continuous = false;
+        recognition.interimResults = false;
         recognition.lang = lang;
-
+        recognition.onstart = () => {
+            setIsListening(true);
+        };
         // Handle recognition results
         recognition.onresult = (event: SpeechRecognitionEvent) => {
             let interimText = '';
