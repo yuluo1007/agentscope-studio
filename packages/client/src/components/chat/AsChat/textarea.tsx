@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useRef, useState, useEffect } from 'react';
 import {
     InputGroup,
     InputGroupAddon,
@@ -93,7 +93,11 @@ const AsTextarea = ({
         },
     });
     const { messageApi } = useMessageApi();
-    if (error) messageApi.error(error);
+
+    useEffect(() => {
+        if (error) messageApi.error(error);
+    }, [error, messageApi]);
+
     const handleToggleVoice = () => {
         if (isListening) {
             stopListening();

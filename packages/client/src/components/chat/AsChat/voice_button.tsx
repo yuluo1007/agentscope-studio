@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface VoiceButtonProps {
     isListening: boolean;
@@ -31,18 +32,21 @@ const VoiceButton: React.FC<VoiceButtonProps> = ({
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`
-        relative ${sizeClasses[size]} rounded-full
-        flex items-center justify-center
-        transition-all duration-300 ease-in-out
-        ${
-            isListening
-                ? 'bg-red-500 hover:bg-red-600 animate-pulse shadow-lg shadow-red-500/50'
-                : 'bg-blue-500 hover:bg-blue-600 shadow-lg shadow-blue-500/30'
-        }
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-110'}
-        ${className}
-      `}
+            className={cn(
+                'relative rounded-full flex items-center justify-center transition-all duration-300 ease-in-out',
+                sizeClasses[size],
+                {
+                    'bg-red-500 hover:bg-red-600 animate-pulse shadow-lg shadow-red-500/50':
+                        isListening,
+                    'bg-blue-500 hover:bg-blue-600 shadow-lg shadow-blue-500/30':
+                        !isListening,
+                },
+                {
+                    'opacity-50 cursor-not-allowed': disabled,
+                    'cursor-pointer hover:scale-110': !disabled,
+                },
+                className,
+            )}
             aria-label={isListening ? 'Stop recording' : 'Start recording'}
         >
             {/* Ripple effect */}

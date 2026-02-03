@@ -66,11 +66,7 @@ const getSystemLanguage = (): string => {
 export const useSpeechRecognition = (
     options: UseSpeechRecognitionOptions = {},
 ): UseSpeechRecognitionReturn => {
-    const {
-        lang = getSystemLanguage(),
-        onResult,
-        onError,
-    } = options;
+    const { lang = getSystemLanguage(), onResult, onError } = options;
 
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
@@ -230,7 +226,7 @@ export const useSpeechRecognition = (
                 recognitionRef.current = null;
             }
         }
-    }, []);
+    }, [setIsListening, setInterimTranscript]);
 
     const resetTranscript = useCallback(() => {
         setTranscript('');
