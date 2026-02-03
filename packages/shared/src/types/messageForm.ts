@@ -60,7 +60,7 @@ export interface ToolResultBlock {
     type: BlockType.TOOL_RESULT;
     id: string;
     name: string;
-    output: string | (TextBlock | ImageBlock | AudioBlock)[];
+    output: string | (TextBlock | ImageBlock | AudioBlock | VideoBlock)[];
 }
 
 export type ContentBlock =

@@ -254,6 +254,27 @@ const ToolResultRender = ({
                         } else if (block.source.type === SourceType.URL) {
                             return <audio src={block.source.url} controls />;
                         }
+                        return null;
+                    case BlockType.VIDEO:
+                        if (block.source.type === SourceType.BASE64) {
+                            const videoUrl = `data:${block.source.media_type};base64,${block.source.data}`;
+                            return (
+                                <video
+                                    src={videoUrl}
+                                    controls
+                                    className="max-w-full max-h-60"
+                                />
+                            );
+                        } else if (block.source.type === SourceType.URL) {
+                            return (
+                                <video
+                                    src={block.source.url}
+                                    controls
+                                    className="max-w-full max-h-60"
+                                />
+                            );
+                        }
+                        return null;
                 }
             })}
         </div>
