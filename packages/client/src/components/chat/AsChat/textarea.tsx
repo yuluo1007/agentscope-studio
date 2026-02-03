@@ -87,6 +87,9 @@ const AsTextarea = ({
         interimResults: true,
         onResult: (newText) => {
             setInternalInputText((prev) => prev + newText + ' ');
+            if (externalInputText !== undefined) {
+                onChange?.(externalInputText + newText + ' ');
+            }
         },
     });
     const { messageApi } = useMessageApi();
