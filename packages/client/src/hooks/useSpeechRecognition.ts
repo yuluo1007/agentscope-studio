@@ -67,8 +67,6 @@ export const useSpeechRecognition = (
     options: UseSpeechRecognitionOptions = {},
 ): UseSpeechRecognitionReturn => {
     const {
-        continuous = false,
-        interimResults = true,
         lang = getSystemLanguage(),
         onResult,
         onError,
@@ -94,7 +92,9 @@ export const useSpeechRecognition = (
         if (!SpeechRecognitionConstructor) return null;
 
         const recognition = new SpeechRecognitionConstructor();
+        // Automatically stop recognizing when the voice ends.
         recognition.continuous = false;
+        // Control whether to return temporary identification results
         recognition.interimResults = false;
         recognition.lang = lang;
         recognition.onstart = () => {
@@ -165,7 +165,7 @@ export const useSpeechRecognition = (
         };
 
         return recognition;
-    }, [continuous, interimResults, lang, onResult, onError, isSupported]);
+    }, [lang, onResult, onError, isSupported]);
 
     // Clean up current recognition instance
     const cleanupRecognition = useCallback(() => {
