@@ -86,6 +86,7 @@ const ChatPage = () => {
                         interruptButton: t('tooltip.button.interrupt-reply'),
                         attachButton: t('tooltip.button.attachment-add'),
                         expandTextarea: t('tooltip.button.expand-textarea'),
+                        voiceButton: t('tooltip.button.voice-button'),
                     }}
                     attachMaxFileSize={20 * 1024 * 1024}
                     onError={(error) => {

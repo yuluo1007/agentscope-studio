@@ -266,7 +266,8 @@
             "render-markdown": "渲染为 Markdown 格式",
             "send-message": "发送消息",
             "send-message-disable": "当前输入请求为空",
-            "scroll-to-bottom": "滚动到最底部"
+            "scroll-to-bottom": "滚动到最底部",
+            "voice-button": "录音"
         },
         "chart": {
             "invocation": "调用次数"

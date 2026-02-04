@@ -45,6 +45,7 @@ export interface AsTextareaProps {
         expandTextarea?: string;
         attachButton: string;
         sendButton: string;
+        voiceButton: string;
     };
     expandable?: boolean;
     attachAccept: string[];
@@ -272,10 +273,15 @@ const AsTextarea = ({
                     </Tooltip>
                 ) : null}
                 {isSupported && (
-                    <VoiceButton
-                        isListening={isListening}
-                        onClick={handleToggleVoice}
-                    />
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <VoiceButton
+                                isListening={isListening}
+                                onClick={handleToggleVoice}
+                            />
+                        </TooltipTrigger>
+                        <TooltipContent>{tooltips.voiceButton}</TooltipContent>
+                    </Tooltip>
                 )}
                 <Tooltip>
                     <TooltipTrigger>

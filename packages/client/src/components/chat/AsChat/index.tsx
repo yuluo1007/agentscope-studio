@@ -73,6 +73,7 @@ interface Props {
         interruptButton?: string;
         attachButton: string;
         expandTextarea: string;
+        voiceButton: string;
     };
     /** Maximum file size for attachments in bytes */
     attachMaxFileSize: number;

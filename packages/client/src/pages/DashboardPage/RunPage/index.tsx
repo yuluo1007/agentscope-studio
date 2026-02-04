@@ -123,6 +123,7 @@ const RunContentPage = () => {
                                 : t('tooltip.button.send-message-disable'),
                             attachButton: t('tooltip.button.attachment-add'),
                             expandTextarea: t('tooltip.button.expand-textarea'),
+                            voiceButton: t('tooltip.button.voice-button'),
                         }}
                         attachMaxFileSize={20 * 1024 * 1024} // 20 MB
                         attachAccept={['image/*', 'video/*', 'audio/*']}

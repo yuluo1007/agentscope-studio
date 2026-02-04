@@ -272,7 +272,8 @@
             "render-markdown": "Render markdown",
             "send-message": "Send your message",
             "send-message-disable": "No user input is requested",
-            "scroll-to-bottom": "Scroll to the bottom"
+            "scroll-to-bottom": "Scroll to the bottom",
+            "voice-button": "Record voice"
         },
         "chart": {
             "invocation": "# of invocation"
