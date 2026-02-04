@@ -66,7 +66,13 @@ const getSystemLanguage = (): string => {
 export const useSpeechRecognition = (
     options: UseSpeechRecognitionOptions = {},
 ): UseSpeechRecognitionReturn => {
-    const { lang = getSystemLanguage(), onResult, onError } = options;
+    const {
+        lang = getSystemLanguage(),
+        onResult,
+        onError,
+        continuous = true,
+        interimResults = false,
+    } = options;
 
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
@@ -89,9 +95,9 @@ export const useSpeechRecognition = (
 
         const recognition = new SpeechRecognitionConstructor();
         // Automatically stop recognizing when the voice ends.
-        recognition.continuous = false;
+        recognition.continuous = continuous;
         // Control whether to return temporary identification results
-        recognition.interimResults = false;
+        recognition.interimResults = interimResults;
         recognition.lang = lang;
         recognition.onstart = () => {
             setIsListening(true);

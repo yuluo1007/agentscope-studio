@@ -24,7 +24,7 @@ import {
 } from '@/components/chat/AsChat/attach.tsx';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area.tsx';
 import { useMessageApi } from '@/context/MessageApiContext';
-import VoiceButton from './voice_button';
+import VoiceButton from '@/components/buttons/VoiceButton';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 
 export interface AsTextareaProps {
@@ -84,7 +84,7 @@ const AsTextarea = ({
         error,
     } = useSpeechRecognition({
         continuous: true,
-        interimResults: true,
+        interimResults: false,
         onResult: (newText) => {
             setInternalInputText((prev) => prev + newText + ' ');
             if (externalInputText !== undefined) {

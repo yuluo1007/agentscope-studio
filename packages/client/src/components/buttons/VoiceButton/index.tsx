@@ -1,7 +1,8 @@
 import React from 'react';
+import { Mic, Square } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface VoiceButtonProps {
+export interface VoiceButtonProps {
     isListening: boolean;
     onClick: () => void;
     disabled?: boolean;
@@ -23,9 +24,9 @@ const VoiceButton: React.FC<VoiceButtonProps> = ({
     };
 
     const iconSizes = {
-        sm: 'w-4 h-4',
-        md: 'w-6 h-6',
-        lg: 'w-8 h-8',
+        sm: 16,
+        md: 24,
+        lg: 32,
     };
 
     return (
@@ -57,33 +58,19 @@ const VoiceButton: React.FC<VoiceButtonProps> = ({
                 </>
             )}
 
-            {/* Microphone icon */}
-            <svg
-                className={`${iconSizes[size]} text-white relative z-10`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
-                {isListening ? (
-                    // Stop icon
-                    <rect
-                        x="6"
-                        y="6"
-                        width="12"
-                        height="12"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                    />
-                ) : (
-                    // Microphone icon
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                    />
-                )}
-            </svg>
+            {/* Icon */}
+            {isListening ? (
+                <Square
+                    className={cn('text-white relative z-10')}
+                    size={iconSizes[size]}
+                    strokeWidth={3}
+                />
+            ) : (
+                <Mic
+                    className={cn('text-white relative z-10')}
+                    size={iconSizes[size]}
+                />
+            )}
         </button>
     );
 };
