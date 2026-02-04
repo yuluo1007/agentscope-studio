@@ -62,7 +62,7 @@ const VoiceButton: React.FC<VoiceButtonProps> = ({
             {isListening ? (
                 <Square
                     className={cn('text-white relative z-10')}
-                    size={iconSizes[size]}
+                    size={iconSizes[size] * 0.7}
                     strokeWidth={3}
                 />
             ) : (
