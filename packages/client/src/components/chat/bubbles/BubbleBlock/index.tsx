@@ -227,7 +227,7 @@ const ToolResultRender = ({
 
     return (
         <div className="w-full bg-[var(--color-code-bg)] p-4 rounded-b-[8px] [&>p]:mt-0!">
-            {output.map((block) => {
+            {output.map((block, index) => {
                 switch (block.type) {
                     case BlockType.TEXT:
                         return <MarkdownRender text={'- ' + block.text} />;
@@ -254,6 +254,25 @@ const ToolResultRender = ({
                         } else if (block.source.type === SourceType.URL) {
                             return <audio src={block.source.url} controls />;
                         }
+                        return null;
+                    case BlockType.VIDEO: {
+                        const source = block.source;
+                        const videoUrl =
+                            source.type === SourceType.BASE64
+                                ? `data:${source.media_type};base64,${source.data}`
+                                : source.url;
+                        if (videoUrl) {
+                            return (
+                                <video
+                                    key={`video_${index}`}
+                                    src={videoUrl}
+                                    controls
+                                    className="max-w-full max-h-60"
+                                />
+                            );
+                        }
+                        return null;
+                    }
                 }
             })}
         </div>

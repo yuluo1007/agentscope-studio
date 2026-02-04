@@ -77,7 +77,7 @@ const toolResultBlock = z.object({
     name: z.string(),
     output: z.union([
         z.string(),
-        z.array(z.union([textBlock, imageBlock, audioBlock])),
+        z.array(z.union([textBlock, imageBlock, audioBlock, videoBlock])),
     ]),
 });
 
